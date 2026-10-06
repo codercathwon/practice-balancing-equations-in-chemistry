@@ -1,0 +1,9 @@
+{
+  "name": "practice-balancing-equations-in-chemistry",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Practice balancing chemical equations with endless randomly generated problems, hints and tips.",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}
