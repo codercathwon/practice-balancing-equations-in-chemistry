@@ -6,13 +6,14 @@
     <title>Balancing Equations Practice</title>
     <meta
       name="description"
-      content="Practice balancing chemical equations with endless randomly generated problems, hints, an atom counter and tips."
+      content="Practice balancing chemical equations with endless randomly generated problems, hints and a live atom tally."
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="site-header">
+      <p class="class-label">11 - FIBONACCI</p>
       <h1>Practice Balancing Equations</h1>
       <p class="subtitle">Type the coefficients so every atom appears the same number of times on both sides.</p>
     </header>
@@ -37,6 +38,7 @@
           <span class="badge" id="type"></span>
         </div>
         <div class="equation" id="equation"></div>
+        <div class="tally" id="tally" role="group" aria-label="Atoms on each side: reactants, element, products"></div>
         <p class="note">Empty boxes count as 1. Press <kbd>Enter</kbd> to check.</p>
 
         <div class="actions">
@@ -49,76 +51,7 @@
         <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
         <ol id="hints" class="hints"></ol>
       </section>
-
-      <section class="card counter-card" aria-label="Atom counter">
-        <div class="counter-head">
-          <h2>Atom counter</h2>
-          <label class="toggle"><input type="checkbox" id="counter-toggle" checked /> Show</label>
-        </div>
-        <table id="counter" class="counter">
-          <thead>
-            <tr>
-              <th scope="col">Element</th>
-              <th scope="col">Reactants</th>
-              <th scope="col">Products</th>
-              <th scope="col"><span class="visually-hidden">Status</span></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
-
-      <section class="tips" aria-label="Tips">
-        <h2>Tips</h2>
-
-        <details open>
-          <summary>How to balance an equation</summary>
-          <ol>
-            <li>Write down how many of each atom are on the left and on the right (the atom counter does this for you).</li>
-            <li>Pick an element that appears in only <strong>one</strong> substance on each side, and balance it first.</li>
-            <li>Change only the <strong>coefficients</strong> (the big numbers in front). Never change the small subscripts — that would make a different substance.</li>
-            <li>Balance <strong>O</strong> and <strong>H</strong> last, since they usually show up in many places.</li>
-            <li>Recount everything. If all coefficients share a factor (like 2, 4, 6), divide them down to the smallest whole numbers.</li>
-          </ol>
-        </details>
-
-        <details>
-          <summary>Tricks that save time</summary>
-          <ul>
-            <li><strong>Polyatomic ions as one unit.</strong> If SO₄, NO₃, PO₄ or OH appears unchanged on both sides, count it as one block instead of counting S and O separately.</li>
-            <li><strong>Fractions are fine while you work.</strong> If you need 3½ O₂, write it as 7/2 in your head, then double every coefficient.</li>
-            <li><strong>Combustion order: C → H → O.</strong> Carbon goes to CO₂, hydrogen goes to H₂O, and O₂ is fixed last.</li>
-            <li><strong>Odd–even trick.</strong> If O comes as O₂ on one side and you have an odd number of O on the other, put a 2 in front of the odd one first.</li>
-            <li><strong>Free elements go last.</strong> Substances made of one element (Fe, O₂, Cl₂) are the easiest to adjust, because changing them affects only that element.</li>
-            <li><strong>Diatomic elements:</strong> H₂, N₂, O₂, F₂, Cl₂, Br₂ and I₂ always come in pairs when they're on their own.</li>
-          </ul>
-        </details>
-
-        <details>
-          <summary>Common mistakes</summary>
-          <ul>
-            <li>Changing a subscript (H₂O → H₂O₂) to make the numbers work. That's hydrogen peroxide, not water.</li>
-            <li>Forgetting that a coefficient multiplies <em>every</em> atom in the formula, including the ones inside parentheses: 3 Ca(OH)₂ has 3 Ca, 6 O and 6 H.</li>
-            <li>Stopping before checking every element once more at the end.</li>
-            <li>Leaving the answer as 2, 4, 2 when 1, 2, 1 works. Always use the smallest whole numbers.</li>
-          </ul>
-        </details>
-
-        <details>
-          <summary>Worked example: propane burning</summary>
-          <p class="example">C₃H₈ + O₂ → CO₂ + H₂O</p>
-          <ol>
-            <li><strong>C:</strong> 3 on the left, so put 3 in front of CO₂.</li>
-            <li><strong>H:</strong> 8 on the left, so put 4 in front of H₂O (4 × 2 = 8).</li>
-            <li><strong>O:</strong> the right now has 3 × 2 + 4 × 1 = 10 O, so put 5 in front of O₂.</li>
-            <li>Check: C 3 = 3, H 8 = 8, O 10 = 10.</li>
-          </ol>
-          <p class="example">C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O</p>
-        </details>
-      </section>
     </main>
-
-    <footer class="site-footer">Every equation is generated randomly, so you can practice as long as you like.</footer>
 
     <script src="chem.js"></script>
     <script src="app.js"></script>

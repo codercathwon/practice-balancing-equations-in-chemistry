@@ -53,8 +53,7 @@ body {
 }
 
 main,
-.site-header,
-.site-footer {
+.site-header {
   max-width: 760px;
   margin: 0 auto;
   padding: 0 16px;
@@ -75,6 +74,18 @@ h1 {
 h2 {
   font-size: 1.1rem;
   margin: 0;
+}
+
+.class-label {
+  display: inline-block;
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 10px;
+  border-radius: 999px;
 }
 
 .subtitle {
@@ -133,6 +144,10 @@ h2 {
 }
 
 /* Cards */
+
+main {
+  padding-bottom: 40px;
+}
 
 .card {
   background: var(--card);
@@ -281,9 +296,7 @@ kbd {
   cursor: default;
 }
 
-button:focus-visible,
-summary:focus-visible,
-.toggle input:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -334,119 +347,52 @@ summary:focus-visible,
   margin-top: 4px;
 }
 
-/* Atom counter */
+/* Atom tally under the equation */
 
-.counter-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--muted);
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.toggle input {
-  accent-color: var(--accent);
-}
-
-.counter {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
+.tally {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content: center;
+  column-gap: 10px;
+  row-gap: 2px;
+  margin: 0 auto 18px;
+  font-size: 1.15rem;
   font-variant-numeric: tabular-nums;
 }
 
-.counter[hidden] {
-  display: none;
+.tally-row {
+  display: contents;
 }
 
-.counter th,
-.counter td {
-  text-align: center;
-  padding: 7px 6px;
-  border-bottom: 1px solid var(--border);
-}
-
-.counter th {
-  font-size: 0.8rem;
+.tally .n {
+  min-width: 2ch;
   font-weight: 600;
+}
+
+.tally .left {
+  text-align: right;
+}
+
+.tally .right {
+  text-align: left;
+}
+
+.tally .el {
+  min-width: 2.2ch;
+  text-align: center;
+  font-weight: 600;
+}
+
+.tally .sep {
   color: var(--muted);
 }
 
-.counter th:first-child,
-.counter td:first-child {
-  text-align: left;
-  font-weight: 600;
-}
-
-.counter tr:last-child td {
-  border-bottom: 0;
-}
-
-.counter .ok {
+.tally .ok .n {
   color: var(--good);
 }
 
-.counter .off {
+.tally .off .n {
   color: var(--bad);
-}
-
-/* Tips */
-
-.tips {
-  margin: 28px 0 8px;
-}
-
-.tips h2 {
-  margin-bottom: 10px;
-}
-
-.tips details {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0 18px;
-  margin-bottom: 10px;
-}
-
-.tips summary {
-  cursor: pointer;
-  font-weight: 600;
-  padding: 14px 0;
-}
-
-.tips details[open] summary {
-  padding-bottom: 6px;
-}
-
-.tips ol,
-.tips ul {
-  padding-left: 22px;
-  margin: 6px 0 16px;
-}
-
-.tips li + li {
-  margin-top: 6px;
-}
-
-.example {
-  font-size: 1.1rem;
-  text-align: center;
-  margin: 8px 0;
-}
-
-.site-footer {
-  color: var(--muted);
-  font-size: 0.85rem;
-  text-align: center;
-  padding-top: 12px;
-  padding-bottom: 36px;
 }
 
 .visually-hidden {

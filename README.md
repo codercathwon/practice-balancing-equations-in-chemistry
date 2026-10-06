@@ -6,9 +6,8 @@ A simple website for practicing how to balance chemical equations. Every problem
 
 - **Endless random equations.** About 800 different equations across seven reaction types: combustion, synthesis, decomposition, single replacement, double replacement, acid–base, and harder redox reactions.
 - **Four difficulty levels.** Easy, Medium, Hard, or Mixed.
-- **Live atom counter.** Shows how many of each atom are on each side as you type. You can hide it if you want more of a challenge.
+- **Live atom tally.** Right under the equation, each element gets a row like `3 – C – 1` (reactants – element – products). Rows turn green as they balance.
 - **Step-by-step hints.** First a strategy for the reaction type, then which element to start with, then one coefficient filled in for you.
-- **Tips section.** Covers the method, time-saving tricks, common mistakes, and a worked example.
 - **Score tracking.** Counts how many you've solved, your current streak, and your best streak. They're saved in your browser.
 - Works on phones, and supports light and dark mode.
 

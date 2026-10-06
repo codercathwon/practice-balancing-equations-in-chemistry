@@ -10,9 +10,7 @@
   const equationEl = $("equation");
   const feedbackEl = $("feedback");
   const hintsEl = $("hints");
-  const counterTable = $("counter");
-  const counterBody = counterTable.querySelector("tbody");
-  const counterToggle = $("counter-toggle");
+  const tallyEl = $("tally");
   const levelButtons = document.querySelectorAll("[data-level]");
   const checkBtn = $("check");
   const hintBtn = $("hint");
@@ -31,7 +29,6 @@
   const saved = loadSaved();
   const state = {
     level: LEVELS.includes(saved.level) ? saved.level : "easy",
-    showCounter: saved.showCounter !== false,
     stats: { solved: saved.solved | 0, streak: saved.streak | 0, best: saved.best | 0 },
     recent: [],
     eq: null,
@@ -44,7 +41,7 @@
     try {
       localStorage.setItem(
         STORE_KEY,
-        JSON.stringify({ level: state.level, showCounter: state.showCounter, ...state.stats })
+        JSON.stringify({ level: state.level, ...state.stats })
       );
     } catch {
       // Progress just won't be remembered.
@@ -125,19 +122,22 @@
     input.value = input.value.replace(/\D/g, "");
     input.classList.remove("invalid");
     if (feedbackEl.classList.contains("bad")) clearFeedback();
-    renderCounter();
+    renderTally();
   }
 
-  function renderCounter() {
+  // One row per element, written the way you'd tally it on paper: "3 – C – 1".
+  function renderTally() {
     const rows = Chem.countAtoms(state.eq, readCoefficients());
-    counterBody.innerHTML = rows
+    const show = (n) => (Number.isNaN(n) ? "?" : n);
+    tallyEl.innerHTML = rows
       .map(({ element, left, right }) => {
         const ok = left === right;
-        const show = (n) => (Number.isNaN(n) ? "?" : n);
         return (
-          "<tr><td>" + element + "</td><td>" + show(left) + "</td><td>" + show(right) + "</td>" +
-          '<td class="' + (ok ? "ok" : "off") + '"><span aria-hidden="true">' + (ok ? "✓" : "✗") + "</span>" +
-          '<span class="visually-hidden">' + (ok ? "balanced" : "not balanced") + "</span></td></tr>"
+          '<div class="tally-row ' + (ok ? "ok" : "off") + '">' +
+          '<span class="n left">' + show(left) + '</span><span class="sep">–</span>' +
+          '<span class="el">' + element + '</span><span class="sep">–</span>' +
+          '<span class="n right">' + show(right) + "</span>" +
+          '<span class="visually-hidden">' + (ok ? "balanced" : "not balanced") + "</span></div>"
         );
       })
       .join("");
@@ -169,7 +169,7 @@
     hintsEl.textContent = "";
     setActionsEnabled(true);
     renderEquation();
-    renderCounter();
+    renderTally();
     if (focus) state.inputs[0].focus({ preventScroll: true });
   }
 
@@ -237,7 +237,7 @@
         "The coefficient for " + Chem.formulaText(eq.species[i]) + " is " + eq.coefficients[i] +
         ". It's filled in for you; work out the rest from there.";
       hintBtn.disabled = true;
-      renderCounter();
+      renderTally();
     }
     const li = document.createElement("li");
     li.textContent = text;
@@ -255,7 +255,7 @@
     state.stats.streak = 0;
     save();
     renderStats();
-    renderCounter();
+    renderTally();
     setActionsEnabled(false);
     say("info", "Answer: " + Chem.equationText(eq, eq.coefficients) + ". Give the next one a try!");
     nextBtn.focus();
@@ -274,19 +274,11 @@
     })
   );
 
-  counterToggle.addEventListener("change", () => {
-    state.showCounter = counterToggle.checked;
-    counterTable.hidden = !state.showCounter;
-    save();
-  });
-
   checkBtn.addEventListener("click", check);
   hintBtn.addEventListener("click", hint);
   revealBtn.addEventListener("click", reveal);
   nextBtn.addEventListener("click", () => newEquation());
 
-  counterToggle.checked = state.showCounter;
-  counterTable.hidden = !state.showCounter;
   setLevel(state.level);
   renderStats();
   newEquation(false);
